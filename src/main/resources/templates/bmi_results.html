@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        header {
+            background-color: #007bff;
+            padding: 10px;
+            color: #fff;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        li {
+            margin-right: 10px;
+        }
+        li a {
+            text-decoration: none;
+            color: #fff;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        .search-input {
+            padding: 5px;
+            margin-right: 10px;
+            width: 200px;
+        }
+        .small {
+    width: 120px;
+    padding: 5px;
+    font-size: 12px;
+}
+    </style>
+</head>
+<body>
+<header>
+    <ul>
+        <li><a href="/add-user">Add User</a></li>
+        <li><a href="/user-list">List User</a></li>
+        <li><a href="/bmiResults">View All BMI Results</a></li>
+    </ul>
+</header>
+<h1>BMI Results</h1>
+
+<div class="search-container">
+
+    <input type="text" class="search-input small" data-column="1" placeholder="Search First Name">
+    <input type="text" class="search-input small" data-column="2" placeholder="Search Last Name">
+    <input type="text" class="search-input small" data-column="3" placeholder="Search Weight">
+    <input type="text" class="search-input small" data-column="4" placeholder="Search Height">
+    <input type="text" class="search-input small" data-column="5" placeholder="Search Create Date">
+    <input type="text" class="search-input small" data-column="6" placeholder="Search Classification Name">
+    <input type="text" class="search-input small" data-column="7" placeholder="Search Index Result">
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>User ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Weight</th>
+        <th>Height</th>
+        <th>Create Date</th>
+        <th>Classification Name</th>
+        <th>Index Result</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="result : ${bmiResults}">
+        <td th:text="${result.userId}"></td>
+        <td th:text="${result.firstName}"></td>
+        <td th:text="${result.lastName}"></td>
+        <td th:text="${result.weight}"></td>
+        <td th:text="${result.height}"></td>
+        <td th:text="${#dates.format(result.createDate, 'dd.MM.yyyy')}"></td>
+        <td th:text="${result.classificationName}"></td>
+        <td th:text="${result.indexResult}"></td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    function filterResults() {
+        var searchInputs = document.getElementsByClassName("search-input");
+        var rows = document.getElementsByTagName("tr");
+
+        for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+            var display = true;
+
+            for (var j = 0; j < searchInputs.length; j++) {
+                var input = searchInputs[j];
+                var columnIndex = parseInt(input.getAttribute("data-column"));
+                var filterValue = input.value.toUpperCase();
+                var cell = row.getElementsByTagName("td")[columnIndex];
+
+                if (cell) {
+                    var cellValue = cell.textContent || cell.innerText;
+
+                    if (cellValue.toUpperCase().indexOf(filterValue) > -1) {
+                        display = display && true;
+                    } else {
+                        display = false;
+                        break;
+                    }
+                }
+            }
+
+            if (display) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+
+    var inputs = document.getElementsByClassName("search-input");
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener("keyup", filterResults);
+    }
+</script>
+
+</body>
+</html>
+

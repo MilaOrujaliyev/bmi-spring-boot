@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        header {
+            background-color: #007bff;
+            padding: 10px;
+            color: #fff;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        li {
+            margin-right: 10px;
+        }
+        li a {
+            text-decoration: none;
+            color: #fff;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <ul>
+        <li><a href="/add-user">Add User</a></li>
+        <li><a href="/user-list">List User</a></li>
+        <li><a href="/bmiResults">View All BMI Results</a></li>
+    </ul>
+</header>
+
+<h1>User List</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>User ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Birth Date</th>
+        <th>Gender</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userId}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${#dates.format(user.birthDate, 'dd.MM.yyyy')}"></td>
+        <td th:text="${user.gender}"></td>
+        <td>
+            <form th:action="@{/bmiEntry/bmiEntry}">
+                <input type="hidden" name="userId" th:value="${user.userId}" />
+                <button type="submit">BMI Entry</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
