@@ -47,13 +47,9 @@ _Prerequisites:_
 - Java JDK
 - Maven
 - PostgreSQL
-
-**Setup:**
-1. Clone the repository: `git clone [repository-link]`
-2. Navigate to the project directory: `cd [project-directory]`
-3. Update the application.properties file with your PostgreSQL credentials.
-4. Build the project: `mvn clean install`
-5. Run the application: `java -jar target/[jar-name].jar`
+  
+# NOTE:
+Please make sure to update the `spring.datasource.password` field in the `application.properties` file with your own PostgreSQL database password before running the application.
 
 **Help & Contribution**
 For any issues, questions, or contributions, please open an issue in the repository or contact the maintainers directly. Any feedback or contribution is appreciated.
