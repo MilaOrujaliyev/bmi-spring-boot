@@ -1,8 +1,8 @@
 # bmi-spring-boot
-BMI calculator with Spring MVC &Boot. Provides a RESTful service for BMI determination, auto date capture, and storage in PostgreSQL. Features advanced reporting tools.
+BMI calculator with Spring Boot. Provides a RESTful service for BMI determination, auto date capture, and storage in PostgreSQL. Features advanced reporting tools.
 **Body Mass Index (BMI) Application**
 **What the project does:**
-This is a Spring MVC RESTful web service application using Spring Boot designed to calculate the Body Mass Index (BMI) based on user input. The application helps users input data like name, surname, date of birth, gender, weight, and height to calculate and categorize their BMI value.
+This is a Spring RESTful web service application using Spring Boot designed to calculate the Body Mass Index (BMI) based on user input. The application helps users input data like name, surname, date of birth, gender, weight, and height to calculate and categorize their BMI value.
 
 **Why the project is useful:**
 With the rise in health awareness, understanding one's BMI is essential. This application not only calculates BMI but also classifies the results and stores the data for future reference. Additionally, its modular database design ensures easy scalability and maintenance.
